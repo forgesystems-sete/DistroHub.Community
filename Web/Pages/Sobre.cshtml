@@ -1,0 +1,42 @@
+@page "/sobre"
+@{
+    ViewData["Title"] = "Sobre o DistroHub";
+    Layout = "_Layout";
+}
+<div class="container" style="padding: 48px 0;">
+    <h1 style="color: var(--accent); margin-bottom: 24px;">Sobre o DistroHub</h1>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
+        <div>
+            <h2 style="margin-bottom: 16px;">🐧 Nossa missão</h2>
+            <p style="color: var(--muted); line-height: 1.8; margin-bottom: 24px;">
+                O DistroHub nasceu da necessidade de ter um catálogo centralizado, confiável e atualizado de distribuições Linux. 
+                Somos apaixonados por open source e acreditamos que a escolha da distro certa não deveria ser um processo demorado e cheio de incertezas.
+            </p>
+            <p style="color: var(--muted); line-height: 1.8;">
+                Nossa plataforma oferece verificação de checksum SHA-256 para cada ISO, garantindo que você baixe arquivos íntegros e seguros. 
+                O projeto é mantido por uma comunidade de entusiastas e profissionais de TI que acreditam no poder do software livre.
+            </p>
+        </div>
+        <div>
+            <h2 style="margin-bottom: 16px;">📬 Contato</h2>
+            <p style="color: var(--muted); line-height: 1.8; margin-bottom: 24px;">
+                Quer contribuir com o catálogo, reportar um problema ou apenas trocar uma ideia? Fale conosco!
+            </p>
+            <ul style="list-style: none; color: var(--muted);">
+                <li style="margin-bottom: 12px;">📧 <a href="mailto:forgesystemscommunity@proton.me" style="color: var(--accent);">forgesystemscommunity@proton.me</a></li>
+                <li style="margin-bottom: 12px;">💼 <a href="https://linkedin.com/in/forgestack" target="_blank" style="color: var(--accent);">LinkedIn</a></li>
+                <li style="margin-bottom: 12px;">🐙 <a href="https://github.com/forgesystems-sete" target="_blank" style="color: var(--accent);">GitHub</a></li>
+            </ul>
+        </div>
+    </div>
+    <div style="margin-top: 48px; padding: 24px; background: var(--surface); border-radius: 12px; border: 1px solid var(--border);" id="telegram">
+        <h3 style="margin-bottom: 12px;">🤖 Bot do Telegram</h3>
+        <p style="color: var(--muted); margin-bottom: 16px;">
+            Receba notificações em tempo real sobre novas ISOs, atualizações de versão e muito mais diretamente no Telegram.
+        </p>
+        <div style="display: flex; gap: 16px; align-items: center;">
+            <a href="https://t.me/DistroHubBot" target="_blank" class="btn btn-primary" style="display: inline-block; width: auto;">🚀 Adicionar ao Telegram</a>
+            <span style="color: var(--muted); font-size: 14px;">(Em desenvolvimento — disponível em breve)</span>
+        </div>
+    </div>
+</div>

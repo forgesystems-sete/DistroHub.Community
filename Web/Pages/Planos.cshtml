@@ -1,0 +1,73 @@
+@page
+@{
+    ViewData["Title"] = "Planos e Preços";
+    Layout = "_Layout";
+}
+
+<div class="container" style="padding: 48px 0;">
+    <h1 style="text-align:center;">Pare de perder tempo com <br>decisões erradas em Linux.</h1>
+    <h2 style="text-align:center;">Escolha a forma mais rápida de encontrar, gerenciar e escalar suas distros.</h2>
+
+    <div style="text-align: center; margin: 48px 0; padding: 24px; background: var(--surface); border-radius: 12px; border-left: 4px solid var(--accent);">
+        <p style="font-size: 18px; font-style: italic;">“O custo do DistroHub é irrelevante perto do custo de decisões erradas em infraestrutura.”</p>
+    </div>
+
+    <div class="pricing-grid">
+        <!-- Community -->
+        <div class="plan-card">
+            <h3>Community</h3>
+            <div class="price">Grátis</div>
+            <div class="plan-badge">Para Sempre</div>
+            <p class="plan-desc">Descubra a distro certa em minutos, não horas.</p>
+            <a href="/download" class="btn btn-secondary">Baixar Community</a>
+            <ul class="feature-list">
+                <li>Catálogo com 15 distros</li>
+                <li>Busca e filtros</li>
+                <li>Interface profissional</li>
+                <li>Ideal para começar</li>
+            </ul>
+        </div>
+
+        <!-- Standard -->
+        <div class="plan-card featured">
+            <h3>Standard</h3>
+            <div class="price">$99</div>
+            <div class="plan-badge">Pagamento Único</div>
+            <p class="plan-desc">Controle total sem depender de dev.</p>
+            <a href="#" class="btn btn-primary">Comprar Standard</a>
+            <ul class="feature-list">
+                <li><strong>Tudo do Community</strong></li>
+                <li>Catálogo ilimitado</li>
+                <li>Painel Admin</li>
+                <li>Upload de ISOs + SHA-256</li>
+            </ul>
+        </div>
+
+        <!-- Professional -->
+        <div class="plan-card">
+            <h3>Professional</h3>
+            <div class="price">$199</div>
+            <div class="plan-badge">Pagamento Único</div>
+            <p class="plan-desc">Operação inteligente e escalável.</p>
+            <a href="#" class="btn btn-primary">Comprar Professional</a>
+            <ul class="feature-list">
+                <li><strong>Tudo do Standard</strong></li>
+                <li>Comparação lado a lado</li>
+                <li>Tracking de downloads</li>
+                <li>API Pública</li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 48px; margin: 48px 0; color: var(--muted);">
+        <div><span style="color: var(--green);">✓</span> Sem mensalidade</div>
+        <div><span style="color: var(--green);">✓</span> Sem lock-in</div>
+        <div><span style="color: var(--green);">✓</span> Funciona para sempre</div>
+    </div>
+
+    <div class="enterprise-section">
+        <h3>Precisa de algo mais?</h3>
+        <p>Para empresas que usam o DistroHub como parte de sua operação crítica.</p>
+        <a href="#" class="btn btn-primary">Falar com Vendas</a>
+    </div>
+</div>

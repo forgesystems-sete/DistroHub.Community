@@ -1,0 +1,21 @@
+/* site.css — gerado automaticamente */
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: system-ui, sans-serif; margin: 0; padding: 1rem 2rem; }
+h1 { font-size: 1.75rem; }
+a { color: #0284c7; }
+.lista-distros { list-style: none; padding: 0; }
+.lista-distros li { padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; }
+.badge { background: #0ea5e9; color: #fff; font-size: 0.75rem; padding: 0.1rem 0.4rem; border-radius: 4px; margin-left: 0.5rem; }
+/* Estilos da página de planos */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:48px 0;}
+.plan-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;transition:transform 0.2s, border-color 0.2s;}
+.plan-card:hover{transform:translateY(-4px);}
+.plan-card.featured{border-color:var(--accent);box-shadow:0 0 30px var(--glow);}
+.plan-card h3{font-size:24px;margin-bottom:8px;}
+.price{font-size:36px;font-weight:700;color:var(--accent);margin-bottom:8px;}
+.plan-badge{display:inline-block;background:rgba(0,212,255,0.15);color:var(--accent);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:24px;}
+.plan-desc{color:var(--muted);margin-bottom:24px;font-size:15px;}
+.feature-list{list-style:none;}
+.feature-list li{margin-bottom:16px;display:flex;gap:12px;color:var(--muted);font-size:14px;}
+.feature-list li::before{content:"✓";color:var(--green);font-weight:700;display:inline-block;width:20px;}
+.enterprise-section{margin-top:64px;text-align:center;padding:48px;background:var(--surface);border-radius:16px;border:1px solid var(--border);}

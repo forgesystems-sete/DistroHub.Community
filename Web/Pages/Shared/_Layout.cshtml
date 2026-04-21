@@ -1,0 +1,50 @@
+@{
+    var title = ViewData["Title"]?.ToString() ?? "DistroHub";
+    var desc  = ViewData["Description"]?.ToString() ?? "Discover Linux distributions";
+}
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@title</title>
+    <meta name="description" content="@desc" />
+    <meta name="referrer" content="no-referrer" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header">
+        <div class="container hdr-inner">
+            <a href="/" class="site-logo">
+                <span class="logo-tux">🐧</span>
+                DistroHub
+                <span class="logo-badge">Community</span>
+            </a>
+            <nav class="site-nav">
+                <a href="/" class="nav-link">Browse</a>
+            </nav>
+        </div>
+    </header>
+
+    @RenderBody()
+
+<footer style="margin-top: 64px; padding: 24px; text-align: center; border-top: 1px solid var(--border);"> 
+    <p style="color: var(--muted); margin-bottom: 16px;"> 
+        Você está usando o <strong>DistroHub Community</strong> — edição gratuita, ideal para começar. 
+    </p> 
+    <a href="/planos" class="btn btn-primary" style="display: inline-block;"> 
+        ⚡ Fazer Upgrade para Standard ou Professional 
+    </a> 
+    <p style="margin-top: 16px; font-size: 14px; color: var(--muted);"> 
+        Upgrade em 2 minutos. Seus dados migram automaticamente. 
+    </p> 
+</footer>
+    <script>
+    (function(){
+        var t = localStorage.getItem('dh-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+    })();
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

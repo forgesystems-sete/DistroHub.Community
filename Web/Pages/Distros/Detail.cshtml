@@ -1,0 +1,108 @@
+@page "/distros/{slug}"
+@model DistroHub.Web.Pages.Distros.DetailModel
+@{
+    ViewData["Title"]       = Model.Distro is not null ? $"{Model.Distro.Name} — DistroHub" : "Not Found";
+    ViewData["Description"] = Model.Distro?.Description;
+}
+
+@if (Model.Distro is null)
+{
+    <main class="container" style="padding:5rem 0;text-align:center;">
+        <p style="font-size:3rem;">🐧</p>
+        <p style="color:var(--muted);margin:.75rem 0;">Distribution not found.</p>
+        <a href="/" class="btn">← Browse all</a>
+    </main>
+}
+else
+{
+    var d = Model.Distro;
+    <main>
+        <div class="detail-hero">
+            <div class="container">
+                <div class="detail-header">
+                    <div>
+                        <div class="detail-badges">
+                            @if (d.IsFeatured) { <span class="badge badge-blue">Featured</span> }
+                            @if (d.IsRolling)  { <span class="badge badge-green">Rolling</span> }
+                            <span class="badge">@d.Category</span>
+                        </div>
+                        <h1 class="detail-name">@d.Name</h1>
+                        @if (d.LatestVersion is not null)
+                        {
+                            <p class="detail-ver">Version @d.LatestVersion</p>
+                        }
+                    </div>
+                    @if (d.WebsiteUrl is not null)
+                    {
+                        <a href="@d.WebsiteUrl" target="_blank" rel="noopener" class="btn">
+                            Visit Website ↗
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="container detail-body">
+            <div class="detail-grid">
+                <div>
+                    <p class="detail-desc">@d.Description</p>
+
+                    <div class="spec-grid">
+                        <div class="spec-card">
+                            <span class="spec-label">Based On</span>
+                            <span class="spec-val">@(d.BasedOn ?? "Independent")</span>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-label">Desktop</span>
+                            <span class="spec-val">@(d.DesktopEnv == DistroHub.Domain.Enums.DesktopEnv.None ? "None / Any" : d.DesktopEnv.ToString())</span>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-label">Package Manager</span>
+                            <span class="spec-val">@d.PackageManager</span>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-label">Init System</span>
+                            <span class="spec-val">@d.InitSystem</span>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-label">Architectures</span>
+                            <span class="spec-val">@string.Join(", ", d.Architectures)</span>
+                        </div>
+                        @if (d.IsoSizeMb.HasValue)
+                        {
+                            <div class="spec-card">
+                                <span class="spec-label">ISO Size</span>
+                                <span class="spec-val">~@d.IsoSizeMb MB</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div>
+                    <div class="detail-side-card">
+                        <h3 class="side-title">Quick Facts</h3>
+                        <div class="fact-row">
+                            <span>Release model</span>
+                            <strong>@(d.IsRolling ? "Rolling" : "Point release")</strong>
+                        </div>
+                        <div class="fact-row">
+                            <span>Category</span>
+                            <strong>@d.Category</strong>
+                        </div>
+                        @if (d.WebsiteUrl is not null)
+                        {
+                            <div class="fact-row">
+                                <span>Website</span>
+                                <a href="@d.WebsiteUrl" target="_blank" rel="noopener">
+                                    Visit ↗
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <a href="/" class="btn btn-ghost" style="margin-top:2rem;display:inline-flex;">← Back to catalog</a>
+        </div>
+    </main>
+}

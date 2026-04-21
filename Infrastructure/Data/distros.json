@@ -1,0 +1,74 @@
+[
+  {
+    "Id": 1, "Name": "Ubuntu", "Slug": "ubuntu",
+    "Description": "The world's most popular Linux distribution. Backed by Canonical, Ubuntu offers long-term support releases and a huge software ecosystem. Perfect for newcomers and professionals alike.",
+    "LogoUrl": "/logos/ubuntu.svg", "WebsiteUrl": "https://ubuntu.com",
+    "LatestVersion": "24.04 LTS", "BasedOn": "Debian",
+    "DesktopEnv": 0, "PackageManager": 0, "InitSystem": 0,
+    "Category": 1, "Architectures": [0, 1], "IsRolling": false, "IsFeatured": true,
+    "DownloadCount": 0, "IsoDownloadUrl": null, "IsoSizeMb": 2800
+  },
+  {
+    "Id": 2, "Name": "Arch Linux", "Slug": "arch-linux",
+    "Description": "A minimalist, rolling-release distro for advanced users. Install only what you need. The Arch Wiki is the most comprehensive Linux documentation available anywhere.",
+    "LogoUrl": "/logos/arch.svg", "WebsiteUrl": "https://archlinux.org",
+    "LatestVersion": "2025.04", "BasedOn": null,
+    "DesktopEnv": 8, "PackageManager": 1, "InitSystem": 0,
+    "Category": 2, "Architectures": [0, 1], "IsRolling": true, "IsFeatured": true,
+    "DownloadCount": 0, "IsoDownloadUrl": null, "IsoSizeMb": 900
+  },
+  {
+    "Id": 3, "Name": "Fedora", "Slug": "fedora",
+    "Description": "A cutting-edge, community-driven distro sponsored by Red Hat. Ships the latest GNOME and kernel. The proving ground for RHEL technologies.",
+    "LogoUrl": "/logos/fedora.svg", "WebsiteUrl": "https://fedoraproject.org",
+    "LatestVersion": "41", "BasedOn": null,
+    "DesktopEnv": 0, "PackageManager": 2, "InitSystem": 0,
+    "Category": 0, "Architectures": [0, 1], "IsRolling": false, "IsFeatured": true,
+    "DownloadCount": 0, "IsoDownloadUrl": null, "IsoSizeMb": 2200
+  },
+  {
+    "Id": 4, "Name": "Linux Mint", "Slug": "linux-mint",
+    "Description": "The most Windows-friendly Linux distribution. Cinnamon desktop, familiar UI, excellent hardware support. Highly recommended for users switching from Windows.",
+    "LogoUrl": "/logos/mint.svg", "WebsiteUrl": "https://linuxmint.com",
+    "LatestVersion": "22", "BasedOn": "Ubuntu",
+    "DesktopEnv": 4, "PackageManager": 0, "InitSystem": 0,
+    "Category": 1, "Architectures": [0], "IsRolling": false, "IsFeatured": true,
+    "DownloadCount": 0, "IsoDownloadUrl": null, "IsoSizeMb": 2400
+  },
+  {
+    "Id": 5, "Name": "NixOS", "Slug": "nixos",
+    "Description": "A unique distro where the entire system is declared in a single configuration file. Reproducible, atomic upgrades, rollback support. The future of Linux system management.",
+    "LogoUrl": "/logos/nixos.svg", "WebsiteUrl": "https://nixos.org",
+    "LatestVersion": "24.11", "BasedOn": null,
+    "DesktopEnv": 9, "PackageManager": 4, "InitSystem": 0,
+    "Category": 2, "Architectures": [0, 1], "IsRolling": false, "IsFeatured": false,
+    "DownloadCount": 0, "IsoDownloadUrl": null, "IsoSizeMb": 1400
+  },
+  {
+    "Id": 6, "Name": "Tails", "Slug": "tails",
+    "Description": "A live OS focused entirely on privacy. Routes all traffic through Tor. Leaves no trace on the host computer. Trusted by journalists, activists, and privacy advocates worldwide.",
+    "LogoUrl": "/logos/tails.svg", "WebsiteUrl": "https://tails.boum.org",
+    "LatestVersion": "6.2", "BasedOn": "Debian",
+    "DesktopEnv": 5, "PackageManager": 0, "InitSystem": 0,
+    "Category": 3, "Architectures": [0], "IsRolling": false, "IsFeatured": true,
+    "DownloadCount": 0, "IsoDownloadUrl": null, "IsoSizeMb": 1600
+  },
+  {
+    "Id": 7, "Name": "openSUSE Tumbleweed", "Slug": "opensuse-tumbleweed",
+    "Description": "A rock-solid rolling-release distro from SUSE. YaST system management, excellent KDE integration, and the most powerful installer in the Linux ecosystem.",
+    "LogoUrl": "/logos/opensuse.svg", "WebsiteUrl": "https://opensuse.org",
+    "LatestVersion": "Rolling", "BasedOn": null,
+    "DesktopEnv": 1, "PackageManager": 3, "InitSystem": 0,
+    "Category": 0, "Architectures": [0, 1], "IsRolling": true, "IsFeatured": false,
+    "DownloadCount": 0, "IsoDownloadUrl": null, "IsoSizeMb": 3000
+  },
+  {
+    "Id": 8, "Name": "Void Linux", "Slug": "void-linux",
+    "Description": "An independent distro that does things differently: runit init, XBPS package manager, musl libc option. Lightweight, fast, and uncompromisingly minimal.",
+    "LogoUrl": "/logos/void.svg", "WebsiteUrl": "https://voidlinux.org",
+    "LatestVersion": "Rolling", "BasedOn": null,
+    "DesktopEnv": 2, "PackageManager": 7, "InitSystem": 1,
+    "Category": 7, "Architectures": [0, 1, 2], "IsRolling": true, "IsFeatured": false,
+    "DownloadCount": 0, "IsoDownloadUrl": null, "IsoSizeMb": 800
+  }
+]

@@ -1,0 +1,284 @@
+@startuml DistroHub_Lite_Architecture
+!theme plain
+skinparam backgroundColor #0d1117
+skinparam defaultFontColor #e6edf3
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 12
+skinparam ArrowColor #58a6ff
+skinparam ArrowThickness 1.5
+
+skinparam package {
+    BackgroundColor #161b22
+    BorderColor #30363d
+    FontColor #58a6ff
+    FontStyle bold
+}
+
+skinparam class {
+    BackgroundColor #1c2128
+    BorderColor #30363d
+    FontColor #e6edf3
+    HeaderBackgroundColor #21262d
+    AttributeFontColor #7d8590
+    StereotypeFontColor #bc8cff
+}
+
+skinparam note {
+    BackgroundColor #161b22
+    BorderColor #30363d
+    FontColor #7d8590
+}
+
+title <color:#58a6ff>DistroHub Lite — Architecture</color>\n<color:#7d8590>ASP.NET Core 8 · Razor Pages · JSON Read-Only</color>
+
+' ════════════════════════════════════════════
+' ENTRY POINT
+' ════════════════════════════════════════════
+package "Entry Point" {
+    class "Program.cs" as Program <<configuration>> {
+        + AddRazorPages(RootDirectory="/Web/Pages")
+        + AddSingleton<JsonDistroRepository>()
+        + AddScoped<DistroService>()
+        + AddResponseCompression()
+        ..pipeline..
+        + UseStaticFiles()
+        + UseRouting()
+        + MapRazorPages()
+    }
+}
+
+' ════════════════════════════════════════════
+' WEB LAYER
+' ════════════════════════════════════════════
+package "Web Layer  [Web/Pages/]" {
+
+    package "Pages" {
+        class "IndexModel" as Index <<PageModel>> {
+            - _svc : DistroService
+            + Distros : IEnumerable<Distro>
+            + TotalCount : int
+            + Search : string?
+            + Cat / De / Pm : int?
+            + Rolling : bool?
+            + HasFilters : bool
+            ..
+            + OnGet(q, cat, de, pm, rolling)
+        }
+
+        class "DetailModel" as Detail <<PageModel, partial>> {
+            - _svc : DistroService
+            + Distro : Distro?
+            ..
+            + OnGet(slug)
+        }
+
+        class "Sobre" <<PageModel>> {
+            {static} @page "/sobre"
+        }
+
+        class "Comparar" <<PageModel>> {
+            {static} @page "/comparar"
+        }
+
+        class "Isos" <<PageModel>> {
+            {static} @page "/isos"
+        }
+
+        class "Planos" <<PageModel>> {
+            {static} @page "/planos"
+        }
+    }
+
+    package "Shared" {
+        class "_Layout.cshtml" as Layout <<Razor Layout>> {
+            + site-header
+            + site-footer
+            + RenderBody()
+            + RenderSection("Scripts")
+        }
+
+        class "_ViewImports.cshtml" as ViewImports <<config>> {
+            @namespace DistroHub.Web.Pages
+            @using Domain.Entities
+            @using Domain.Enums
+            @addTagHelper *
+        }
+
+        class "_ViewStart.cshtml" as ViewStart <<config>> {
+            Layout = "_Layout"
+        }
+    }
+
+    package "Helpers" {
+        class "FormatHelper" as Helper <<static>> {
+            + {static} FormatSize(sizeMb: decimal?) : string
+        }
+    }
+}
+
+' ════════════════════════════════════════════
+' APPLICATION LAYER
+' ════════════════════════════════════════════
+package "Application Layer  [Application/]" {
+    class "DistroService" as Service <<service>> {
+        - _repo : JsonDistroRepository
+        ..
+        + GetAll(search, cat, de, pm, rolling) : IEnumerable<Distro>
+        + GetBySlug(slug) : Distro?
+        + GetFeatured() : IEnumerable<Distro>
+    }
+}
+
+' ════════════════════════════════════════════
+' INFRASTRUCTURE LAYER
+' ════════════════════════════════════════════
+package "Infrastructure Layer  [Infrastructure/]" {
+    class "JsonDistroRepository" as Repo <<repository, singleton>> {
+        - _distros : IReadOnlyList<Distro>
+        ..
+        + JsonDistroRepository(env: IWebHostEnvironment)
+        + GetAll() : IEnumerable<Distro>
+        + GetBySlug(slug) : Distro?
+        + GetFeatured() : IEnumerable<Distro>
+    }
+
+    class "distros.json" as Json <<data source>> {
+        Id, Name, Slug
+        Description, BasedOn
+        DesktopEnv, PackageManager
+        InitSystem, Category
+        Architectures[], IsRolling
+        IsFeatured, IsoSizeMb
+    }
+}
+
+' ════════════════════════════════════════════
+' DOMAIN LAYER
+' ════════════════════════════════════════════
+package "Domain Layer  [Domain/]" {
+    class "Distro" as Entity <<entity>> {
+        + Id : int
+        + Name : string
+        + Slug : string
+        + Description : string
+        + LogoUrl : string?
+        + WebsiteUrl : string?
+        + LatestVersion : string?
+        + BasedOn : string?
+        + DesktopEnv : DesktopEnv
+        + PackageManager : PackageManager
+        + InitSystem : InitSystem
+        + Category : Category
+        + Architectures : Arch[]
+        + IsRolling : bool
+        + IsFeatured : bool
+        + DownloadCount : int
+        + IsoDownloadUrl : string?
+        + IsoSizeMb : decimal?
+        + CreatedAt / UpdatedAt : DateTime
+        ..computed..
+        + Label : string
+    }
+
+    enum "DesktopEnv" as DE <<enum>> {
+        GNOME · KDE · XFCE
+        LXDE · Cinnamon · MATE
+        Budgie · Pantheon · None · Other
+    }
+
+    enum "PackageManager" as PM <<enum>> {
+        APT · Pacman · DNF · Zypper
+        Portage · Nix · Flatpak · Other
+    }
+
+    enum "Category" as Cat <<enum>> {
+        General · Beginner · Advanced
+        Privacy · Gaming · Server
+        Education · Minimalist
+    }
+
+    enum "InitSystem" <<enum>> {
+        Systemd · OpenRC · Runit · SysV · Other
+    }
+
+    enum "Arch" <<enum>> {
+        X86_64 · ARM64 · ARM · i386 · RISCV
+    }
+}
+
+' ════════════════════════════════════════════
+' STATIC ASSETS
+' ════════════════════════════════════════════
+package "Static Assets  [Web/wwwroot/]" {
+    class "site.css" as CSS <<stylesheet>> {
+        Dark theme variables
+        Nav · Hero · Grid · Cards
+        Badges · Buttons · Forms
+        Pricing · Responsive
+    }
+}
+
+' ════════════════════════════════════════════
+' RELATIONS
+' ════════════════════════════════════════════
+
+' DI wiring
+Program ..> Service    : scoped
+Program ..> Repo       : singleton
+Program ..> Index      : resolves
+
+' Pages → Service
+Index  --> Service : _svc
+Detail --> Service : _svc
+
+' Service → Repo
+Service --> Repo : _repo
+
+' Repo → Data
+Repo --> Json  : reads at startup
+Repo ..> Entity : deserializes
+
+' Pages → Helpers
+Index ..> Helper : FormatSize()
+
+' Entity → Enums
+Entity --> DE
+Entity --> PM
+Entity --> Cat
+
+' Layout
+Index  ..> Layout   : uses
+Detail ..> Layout   : uses
+Sobre  ..> Layout   : uses
+Comparar ..> Layout : uses
+Isos   ..> Layout   : uses
+Planos ..> Layout   : uses
+
+ViewStart ..> Layout      : sets Layout
+ViewImports ..> Index     : @namespace
+ViewImports ..> Detail    : @namespace
+
+' CSS
+Layout ..> CSS : <link>
+
+note right of Repo
+  <color:#58a6ff>Singleton</color>: lê distros.json
+  uma vez na inicialização.
+  In-memory, read-only.
+  Sem banco de dados.
+end note
+
+note right of Program
+  <color:#58a6ff>RootDirectory = "/Web/Pages"</color>
+  Necessário pois Pages/ não
+  está na raiz do projeto.
+end note
+
+note bottom of Detail
+  <color:#58a6ff>partial class</color> necessário:
+  Razor Source Generator gera
+  partial automaticamente
+  a partir 
+end note
+
+@enduml
